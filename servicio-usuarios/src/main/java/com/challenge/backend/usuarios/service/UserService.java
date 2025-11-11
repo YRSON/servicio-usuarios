@@ -2,6 +2,7 @@ package com.challenge.backend.usuarios.service;
 
 import com.challenge.backend.usuarios.model.Product;
 import com.challenge.backend.usuarios.model.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -21,8 +22,13 @@ public class UserService {
 
     private final WebClient webClient;
 
-    public UserService(WebClient.Builder webClientBuilder){
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8081").build();
+    public UserService(
+        WebClient.Builder webClientBuilder,
+        @Value("${client.products.url}") String productsUrl
+    ) {
+        this.webClient = webClientBuilder
+                .baseUrl(productsUrl)
+                .build();
     }
 
     public Flux<User> findAll(){

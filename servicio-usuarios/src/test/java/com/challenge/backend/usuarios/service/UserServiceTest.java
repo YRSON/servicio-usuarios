@@ -39,7 +39,8 @@ public class UserServiceTest {
     void setUp() {
         when(webClientBuilder.baseUrl(anyString())).thenReturn(webClientBuilder);
         when(webClientBuilder.build()).thenReturn(webClient);
-        userService = new UserService(webClientBuilder);
+        String fakeUrl = "http://fake-url-para-test.com";
+        userService = new UserService(webClientBuilder, fakeUrl);
     }
 
     @Test
