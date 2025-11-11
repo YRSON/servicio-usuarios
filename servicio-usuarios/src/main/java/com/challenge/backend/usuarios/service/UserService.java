@@ -1,5 +1,6 @@
 package com.challenge.backend.usuarios.service;
 
+import com.challenge.backend.usuarios.exception.UserNotFoundException;
 import com.challenge.backend.usuarios.model.Product;
 import com.challenge.backend.usuarios.model.User;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,7 +39,8 @@ public class UserService {
     public Mono<User> findById(Long id){
         return Flux.fromIterable(userDataBase)
                 .filter(u -> u.id().equals(id))
-                .next();
+                .next()
+                .switchIfEmpty(Mono.error(new UserNotFoundException("Usuario con ID " + id + " no encontrado")));
     }
 
     public Flux<Product> getProductsFromOtherService() {

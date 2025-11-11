@@ -31,8 +31,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public Mono<User> getUserById(@PathVariable Long id){
-        return userService.findById(id)
-                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado")));
+        return userService.findById(id);
     }
 
     @GetMapping("/productos-de-otro-microservicio")

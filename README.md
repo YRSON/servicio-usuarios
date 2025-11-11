@@ -51,6 +51,16 @@ Este proyecto demuestra una arquitectura moderna y reactiva de microservicios, c
     * Devuelve un `Flux` (lista) de todos los usuarios.
 * `GET /users/{id}`
     * Devuelve un `Mono` (un) usuario por su ID.
-    * Devuelve un JSON de error 404 si no se encuentra.
 * `GET /users/productos-de-otro-microservicio`
     * **Endpoint de comunicación:** Llama al `servicio-productos` (`:8081`) y devuelve un `Flux` de todos los productos.
+
+### Ejemplos de Prueba (Endpoints)
+
+Asegúrate de que ambos servicios estén corriendo (`:8080` y `:8081`).
+
+* **Probar `GET /users/{id}` (Éxito):**
+    * [http://localhost:8080/users/1](http://localhost:8080/users/1)
+* **Probar `GET /users/{id}` (Error 404):**
+    * [http://localhost:8080/users/999](http://localhost:8080/users/999)
+* **Probar Comunicación (Llamada a Productos):**
+    * [http://localhost:8080/users/products-from-other-service](http://localhost:8080/users/products-from-other-service)
